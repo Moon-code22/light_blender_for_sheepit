@@ -2116,7 +2116,7 @@ static int direct_link_id_restore_recalc(const FileData *fd,
       recalc |= id_current->recalc_up_to_undo_push;
     }
     else {
-      BLI_assert(fd->undo_direction == STEP_REDO);
+      //BLI_assert(fd->undo_direction == STEP_REDO);
       /* Redo: tags from current to the target state. */
       recalc |= id_target->recalc_up_to_undo_push;
     }
@@ -2226,7 +2226,7 @@ static void direct_link_id_common(
 /* -------------------------------------------------------------------- */
 /** \name Read ID: Shape Keys
  * \{ */
-
+//SHEEP-COMMENT shapekey-read - low prio, remove
 void blo_do_versions_key_uidgen(Key *key)
 {
   key->uidgen = 1;
@@ -2301,6 +2301,8 @@ static void lib_link_scenes_check_set(Main *bmain)
 /* -------------------------------------------------------------------- */
 /** \name Read ID: Screen
  * \{ */
+
+//SHEEP-COMMENT This does not eat very much RAM, however it isn't needed, we could remove it another day low prio
 
 /* how to handle user count on pointer restore */
 typedef enum ePointerUserMode {
@@ -2495,6 +2497,8 @@ static void lib_link_window_scene_data_restore(wmWindow *win, Scene *scene, View
     }
   }
 }
+
+//SHEEP-TODO remove image textures medium prioroty
 
 static void lib_link_workspace_layout_restore(struct IDNameLib_Map *id_map,
                                               Main *newmain,
@@ -3597,13 +3601,13 @@ static void do_versions(FileData *fd, Library *lib, Main *main)
               main->build_hash);
   }
 
-  blo_do_versions_pre250(fd, lib, main);
+  /*blo_do_versions_pre250(fd, lib, main);
   blo_do_versions_250(fd, lib, main);
   blo_do_versions_260(fd, lib, main);
   blo_do_versions_270(fd, lib, main);
   blo_do_versions_280(fd, lib, main);
   blo_do_versions_290(fd, lib, main);
-  blo_do_versions_300(fd, lib, main);
+  blo_do_versions_300(fd, lib, main);*/
   blo_do_versions_cycles(fd, lib, main);
 
   /* WATCH IT!!!: pointers from libdata have not been converted yet here! */

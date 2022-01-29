@@ -2299,9 +2299,9 @@ void blo_do_versions_300(FileData *fd, Library *UNUSED(lib), Main *bmain)
       if (ntree->type != NTREE_GEOMETRY) {
         continue;
       }
-      version_node_id(ntree, FN_NODE_SLICE_STRING, "FunctionNodeSliceString");
+      /*version_node_id(ntree, FN_NODE_SLICE_STRING, "FunctionNodeSliceString");
       version_geometry_nodes_set_position_node_offset(ntree);
-      version_node_id(ntree, GEO_NODE_LEGACY_VOLUME_TO_MESH, "GeometryNodeLegacyVolumeToMesh");
+      version_node_id(ntree, GEO_NODE_LEGACY_VOLUME_TO_MESH, "GeometryNodeLegacyVolumeToMesh");*/
     }
 
     /* Add storage to viewer node. */
@@ -2312,10 +2312,10 @@ void blo_do_versions_300(FileData *fd, Library *UNUSED(lib), Main *bmain)
       LISTBASE_FOREACH (bNode *, node, &ntree->nodes) {
         if (node->type == GEO_NODE_VIEWER) {
           if (node->storage == NULL) {
-            NodeGeometryViewer *data = (NodeGeometryViewer *)MEM_callocN(
+            /*NodeGeometryViewer *data = (NodeGeometryViewer *)MEM_callocN(
                 sizeof(NodeGeometryViewer), __func__);
             data->data_type = CD_PROP_FLOAT;
-            node->storage = data;
+            node->storage = data;*/
           }
         }
       }
@@ -2323,7 +2323,8 @@ void blo_do_versions_300(FileData *fd, Library *UNUSED(lib), Main *bmain)
 
     LISTBASE_FOREACH (bNodeTree *, ntree, &bmain->nodetrees) {
       if (ntree->type == NTREE_GEOMETRY) {
-        version_node_input_socket_name(
+        /*version_node_input_socket_name(
+        //SHEEP-COMMENT removed geometry nodes (I think)
             ntree, GEO_NODE_DISTRIBUTE_POINTS_ON_FACES, "Geometry", "Mesh");
         version_node_input_socket_name(ntree, GEO_NODE_POINTS_TO_VOLUME, "Geometry", "Points");
         version_node_output_socket_name(ntree, GEO_NODE_POINTS_TO_VOLUME, "Geometry", "Volume");
@@ -2352,7 +2353,7 @@ void blo_do_versions_300(FileData *fd, Library *UNUSED(lib), Main *bmain)
         version_node_output_socket_name(ntree, GEO_NODE_MESH_PRIMITIVE_LINE, "Geometry", "Mesh");
         version_node_output_socket_name(
             ntree, GEO_NODE_MESH_PRIMITIVE_UV_SPHERE, "Geometry", "Mesh");
-        version_node_socket_name(ntree, GEO_NODE_SET_POINT_RADIUS, "Geometry", "Points");
+        version_node_socket_name(ntree, GEO_NODE_SET_POINT_RADIUS, "Geometry", "Points");*/
       }
     }
   }
